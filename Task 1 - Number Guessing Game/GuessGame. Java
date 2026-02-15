@@ -1,0 +1,53 @@
+import java.util.Scanner;
+import java.util.Random;
+
+public class GuessGame {
+
+    public static void main(String[] args) {
+
+        Scanner input = new Scanner(System.in);
+        Random random = new Random();
+
+        int answer = random.nextInt(100);
+        int attempts = 0;
+        int maxTurns = 10;
+        boolean isGuessed = false;
+
+        System.out.println("Guess a number between 1 to 100, You will have 10 turns! \n");
+        System.out.println("All the best..!! \n Play game enter the number \n");
+
+        while (!isGuessed && attempts < maxTurns) {
+
+            int userGuess = input.nextInt();
+            attempts++;
+
+            if (userGuess == answer) {
+                isGuessed = true;
+            }
+            else if (userGuess < answer) {
+                System.out.println(
+                    "Your Guess is lower than the right guess! Turns left: " 
+                    + (maxTurns - attempts) + "\n"
+                );
+            }
+            else {
+                System.out.println(
+                    "Your Guess Is Higher Than THe Right Guess! Turns left: " 
+                    + (maxTurns - attempts) + "\n"
+                );
+            }
+        }
+
+        if (isGuessed) {
+            System.out.println("YOu win!");
+            System.out.println("Then number was " + answer);
+            System.out.println("\n You used " + attempts + " turns to guess the right number");
+            System.out.println("Your score is " + ((11 - attempts) * 10) + " out of 100");
+        } else {
+            System.out.println("You loose! the right answer was: " + answer);
+        }
+
+        input.close();
+    }
+}
+
