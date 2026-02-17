@@ -1,0 +1,116 @@
+import java.util.Scanner;
+
+public class OnlineExamination {
+
+    static String username = "student";
+    static String password = "123";
+    static String name = "User";
+
+    public static void main(String[] args) throws InterruptedException {
+
+        Scanner sc = new Scanner(System.in);
+
+        // LOGIN
+        System.out.println("---- Online Examination System ----");
+        System.out.print("Enter Username: ");
+        String u = sc.nextLine();
+
+        System.out.print("Enter Password: ");
+        String p = sc.nextLine();
+
+        if (!u.equals(username) || !p.equals(password)) {
+            System.out.println("Invalid Login!");
+            return;
+        }
+
+        System.out.println("Login Successful!\n");
+
+        while (true) {
+
+            System.out.println("1. Update Profile");
+            System.out.println("2. Change Password");
+            System.out.println("3. Start Exam");
+            System.out.println("4. Logout");
+            System.out.print("Enter choice: ");
+            int choice = sc.nextInt();
+
+            switch (choice) {
+
+                case 1:
+                    updateProfile(sc);
+                    break;
+
+                case 2:
+                    changePassword(sc);
+                    break;
+
+                case 3:
+                    startExam(sc);
+                    break;
+
+                case 4:
+                    System.out.println("Logged out successfully.");
+                    return;
+
+                default:
+                    System.out.println("Invalid choice!");
+            }
+        }
+    }
+
+    // UPDATE PROFILE
+    static void updateProfile(Scanner sc) {
+        sc.nextLine();
+        System.out.print("Enter new name: ");
+        name = sc.nextLine();
+        System.out.println("Profile updated successfully.");
+    }
+
+    // CHANGE PASSWORD
+    static void changePassword(Scanner sc) {
+        sc.nextLine();
+        System.out.print("Enter new password: ");
+        password = sc.nextLine();
+        System.out.println("Password changed successfully.");
+    }
+
+    // EXAM MODULE
+    static void startExam(Scanner sc) throws InterruptedException {
+
+        int score = 0;
+        int time = 10; // seconds
+
+        System.out.println("\nExam started! You have " + time + " seconds.");
+
+        // TIMER
+        for (int i = time; i > 0; i--) {
+            System.out.print("Time left: " + i + " seconds\r");
+            Thread.sleep(1000);
+        }
+
+        System.out.println("\nTime up! Exam auto submitted.\n");
+
+        // QUESTION 1
+        System.out.println("1. Which of the following is used to take input from user in Java?");
+        System.out.println("a) System.out"); 
+        System.out.println("b) Scanner");
+        System.out.println("c) println");
+        System.out.print("Answer: ");
+        char ans1 = sc.next().charAt(0);
+
+        if (ans1 == 'b') score++;
+
+        // QUESTION 2
+        System.out.println("\n2. Which loop is used when we know the number of iterations?");
+        System.out.println("a) while");
+        System.out.println("b) do-while");
+        System.out.println("c) for");
+        System.out.print("Answer: ");
+        char ans2 = sc.next().charAt(0);
+
+        if (ans2 == 'c') score++;
+
+        System.out.println("\nExam finished.");
+        System.out.println("Score: " + score + "/2");
+    }
+}
